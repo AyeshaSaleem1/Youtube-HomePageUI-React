@@ -1,0 +1,64 @@
+
+
+
+
+
+/* Bootstrap 4 text input with search icon */
+.input-group
+{
+   
+    width: 100%;
+    height: 60%;
+    /* margin: 50px auto; */
+    /* height: 45px; */
+   margin: 7px;
+    /* border: 4px double red; */
+}
+input:focus
+{
+    /* outline: rgb(32, 3, 66)  auto  !important; */
+    /* outline-offset: -2px !important; */
+    outline-color: brown !important;
+
+    box-shadow: none !important;   
+}
+button:focus
+{
+    outline-color: brown !important;
+    box-shadow: none !important;   
+}
+input
+{
+ 
+  
+    font-family: 'roboto';
+  width: 80%;
+    height: 100%;
+}
+.input-group-append
+{
+    width: 20%;
+    height: 100% ;
+}
+
+._icon
+{
+    font-size:'x-large';
+     color:rgb(185, 179, 179)
+}
+
+.btn
+{
+    padding-top: 4px;
+    padding-bottom: 2px;
+padding-right:15%;
+padding-left:15%;
+text-align: center;
+    align-content: center;
+    border: 1px solid rgb(221, 213, 213);
+}
+.form-control {
+    
+    font-size: 20px;
+    /* border: 1px solid #5F5E5E; */
+}
