@@ -1,65 +1,70 @@
-import React from 'react';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
+import React from "react";
+import clsx from "clsx";
+import { fade, makeStyles, useTheme } from "@material-ui/core/styles";
+import Drawer from "./Drawer";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import MailIcon from "@material-ui/icons/Mail";
+import Menu from '@material-ui/core/Menu';
+import AppsIcon from '@material-ui/icons/Apps';
+import VideoCallIcon from '@material-ui/icons/VideoCall';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import 'typeface-roboto'
 import SearchBar from './SearchBar';
 
-import WebFont from "webfontloader";
-import Drawer from './Drawer'
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex"
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    })
+  },
+  menuButton: {
+    marginRight: 26,
+    fontSize: '50px',
 
+    [theme.breakpoints.down("sm")]: {
+      marginRight: 0,
+      fontSize: '30px'
+    }
 
-import AppsIcon from '@material-ui/icons/Apps';
-import VideoCallIcon from '@material-ui/icons/VideoCall';
-
-WebFont.load({google: {families: ["Roboto:400"]}});
-const useStyles = makeStyles((theme) => ({
+  },
   grow: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    
-  },
+
   title: {
     display: 'none',
-    fontWeight:800,
-    fontSize:'20px',
-    letterSpacing:'-0.150em',
-    fontStretch:'absolute',
-    [theme.breakpoints.up('lg')]: {
+    fontWeight: 800,
+    fontSize: '20px',
+    letterSpacing: '-0.150em',
+    fontStretch: 'absolute',
+    [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
   },
   search: {
-    border:'3px dotted red',
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),    //this
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),   //this
     },
-    // marginRight: theme.spacing(2),
-    // marginLeft: '20px',
-     width: '100%',
-    [theme.breakpoints.up('sm')]: {
-     // marginLeft: theme.spacing(20),
-    //  width: 'auto',
-  //  width: '50ch',
-    },
+    width: '100%',
+
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -70,50 +75,53 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  inputRoot: {
-    // color: 'inherit',
-  },
+
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0.5),
     // vertical padding + font size from searchIcon
     paddingRight: `calc(1em + ${theme.spacing(0.2)}px)`,
-  // transition: theme.transitions.create('width'),
+    // transition: theme.transitions.create('width'),
     width: '50%',
-   
-    [theme.breakpoints.up('md')]: {
-   //   width: '40ch',
-    },
   },
+
   sectionDesktop: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
       display: 'flex',
     },
   },
+
   sectionMobile: {
     display: 'flex',
     [theme.breakpoints.up('md')]: {
-     display: 'none',
+      display: 'none',
     },
-    YouTubeI:
-    {
-      color: '#FF0000'
-    },
-    icon:
-  {
-    color:'443f3f',
-   
-  }
   },
+  YouTubeI:
+  {
+    color: '#FF0000',
+    fontSize: 39
+  },
+  icon:
+  {
+    color: '443f3f',
+  }
 }));
 
-export default function PrimarySearchAppBar() {
+export default function MiniDrawer() {
   const classes = useStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const handleDrawerOpen = () => {
+    setOpen(!open);
+  };
+
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -189,60 +197,44 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
+
+
   return (
-    <div className={classes.grow}>
-      <AppBar position="static" style={{backgroundColor:'White',color:"Black"}}>
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar position="fixed" className={clsx(classes.appBar)} style={{ backgroundColor: 'White', color: "Black", boxShadow: 'none' }}>
         <Toolbar>
           <IconButton
-            edge="start"
-            className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
-           <YouTubeIcon className={classes.YouTubeI}  color="secondary" fontSize="large" style={{ fontSize: 39 }}/>
-          <Typography className={classes.title} variant="h5" noWrap >
-       
+            onClick={handleDrawerOpen}
+            edge="start"
+            className={clsx(classes.menuButton)}
 
-          Yo uTu b e<sup style={{fontSize:12, fontWeight:300, letterSpacing:'0em'}}> PK</sup>
-        
+          >
+          <MenuIcon style={{ fontSize: '30px' }} />
+          </IconButton>
+          <YouTubeIcon className={classes.YouTubeI}/>
+          <Typography className={classes.title} variant="h5" noWrap >
+            Yo uTu b e<sup style={{ fontSize: 12, fontWeight: 300, letterSpacing: '0em' }}> PK</sup>
           </Typography >
           <div className={classes.grow} />
-
-          <div className={classes.search,classes.inputInput}>
-          <SearchBar classes={{
-             
-              }}/>
+          <div className={classes.search, classes.inputInput}>
+            <SearchBar />
           </div>
-          
 
-          {/* <div>
-           
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-             <button style={{backgroundColor:'red'}}>  <SearchIcon /></button>
-             */}
-             {/* <div className={classes.searchIcon}>
-            </div> */}
-          {/* </div> */}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-          <IconButton aria-label="show 4 new mails" style={{paddingRight:'30px'}}>
-               <VideoCallIcon   style={{fontSize:'30px',color:'606060'}}/>
-               </IconButton>
-            <IconButton aria-label="show 4 new mails" style={{paddingRight:'30px',}}>
-             <AppsIcon style={{fontSize:'30px', color:'606060'}}/>
+            <IconButton aria-label="show 4 new mails" style={{ paddingRight: '30px' }}>
+              
+              <VideoCallIcon style={{ fontSize: '30px', color: '606060' }} />
             </IconButton>
-            <IconButton aria-label="show 17 new notifications" style={{paddingRight:'30px'}} >
+            <IconButton aria-label="show 4 new mails" style={{ paddingRight: '30px', }}>
+              <AppsIcon style={{ fontSize: '30px', color: '606060' }} />
+            </IconButton>
+            <IconButton aria-label="show 17 new notifications" style={{ paddingRight: '30px' }} >
               <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon  style={{fontSize:'30px',color:'606060'}}/>
+                <NotificationsIcon style={{ fontSize: '30px', color: '#606060' }} />
               </Badge>
             </IconButton>
             <IconButton
@@ -251,10 +243,10 @@ export default function PrimarySearchAppBar() {
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
-              
-              style={{paddingRight:'30px'}}
+
+              style={{ paddingRight: '30px' }}
             >
-              <AccountCircle   style={{fontSize:'35px',color:'606060'}} />
+              <AccountCircle style={{ fontSize: '35px', color: '606060' }} />
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
@@ -268,11 +260,10 @@ export default function PrimarySearchAppBar() {
               <MoreIcon />
             </IconButton>
           </div>
+
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
-  
+      <Drawer open={open} />
     </div>
   );
 }

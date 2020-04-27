@@ -1,12 +1,7 @@
 
-
-
-
-
 /* Bootstrap 4 text input with search icon */
 .input-group
 {
-   
     width: 100%;
     height: 60%;
     /* margin: 50px auto; */
@@ -18,22 +13,19 @@ input:focus
 {
     /* outline: rgb(32, 3, 66)  auto  !important; */
     /* outline-offset: -2px !important; */
-    outline-color: brown !important;
-
     box-shadow: none !important;   
 }
 button:focus
 {
-    outline-color: brown !important;
+    outline-color: transparent !important;
     box-shadow: none !important;   
 }
 input
 {
- 
-  
-    font-family: 'roboto';
+
+  font-family: 'roboto';
   width: 80%;
-    height: 100%;
+  height: 100%;
 }
 .input-group-append
 {
